@@ -15,6 +15,7 @@ import { Avatar, Fade, Popper } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { selectUser } from "../features/userSlice.js";
 import db, { auth } from "../firebase.js";
+import Swal from "sweetalert2";
 
 const Sidebar = () => {
 	const user = useSelector(selectUser);
@@ -40,13 +41,19 @@ const Sidebar = () => {
 	}, []);
 
 	const handleAddChannel = () => {
-		const channelName = prompt("Enter a new channel name:");
+		// const channelName = prompt("Enter a new channel name:");
 
-		if (channelName) {
-			db.collection("channels").add({
-				channelName: channelName,
-			});
-		}
+		// if (channelName) {
+		// 	db.collection("channels").add({
+		// 		channelName: channelName,
+		// 	});
+		// }
+		Swal.fire({
+			title: "Not Permission!",
+			text: "Only administrator can operate !",
+			icon: "warning",
+			confirmButtonText: "Ok",
+		});
 	};
 
 	return (
