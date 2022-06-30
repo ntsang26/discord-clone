@@ -61,7 +61,7 @@ const Chat = () => {
 					<input
 						type="text"
 						disabled={!channelId}
-						placeholder={`Message #${channelId?.substring(0, 4)}`}
+						placeholder={`Message #${channelId?.substring(0, 4) || "channel"}`}
 						value={input}
 						onChange={(e) => setInput(e.target.value)}
 					/>

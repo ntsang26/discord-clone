@@ -10,7 +10,8 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 20px;
+	padding: 0 20px;
+	height: 70px;
 	background-color: #2f3136;
 	color: #fff;
 	border-bottom: 3px solid #26282c;
