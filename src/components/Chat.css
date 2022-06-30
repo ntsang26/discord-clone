@@ -45,10 +45,10 @@
 .chat__inputButton {
 	display: none;
 }
-.chat__inputIcons > .MuiSvgIcon-root {
+.chat__sendIcon > .MuiSvgIcon-root {
 	padding: 5px;
 	cursor: pointer;
 }
-.chat__inputIcons > .MuiSvgIcon-root:hover {
+.chat__sendIcon > .MuiSvgIcon-root:hover {
 	color: white;
 }

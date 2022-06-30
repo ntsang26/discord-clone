@@ -1,9 +1,4 @@
-import {
-	AddCircle,
-	CardGiftcard,
-	EmojiEmotions,
-	Gif,
-} from "@material-ui/icons";
+import { AddCircle, Send } from "@material-ui/icons";
 import React, { useEffect, useState } from "react";
 import "./Chat.css";
 import ChatHeader from "./ChatHeader.js";
@@ -36,11 +31,13 @@ const Chat = () => {
 	const sendMessage = (e) => {
 		e.preventDefault();
 
-		db.collection("channels").doc(channelId).collection("messages").add({
-			timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-			message: input,
-			user,
-		});
+		if (input) {
+			db.collection("channels").doc(channelId).collection("messages").add({
+				timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+				message: input,
+				user,
+			});
+		}
 
 		setInput("");
 	};
@@ -74,10 +71,8 @@ const Chat = () => {
 					</button>
 				</form>
 
-				<div className="chat__inputIcons">
-					<CardGiftcard />
-					<Gif />
-					<EmojiEmotions />
+				<div className="chat__sendIcon">
+					<Send onClick={sendMessage} />
 				</div>
 			</div>
 		</div>

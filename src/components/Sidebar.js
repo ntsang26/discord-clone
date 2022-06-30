@@ -56,6 +56,15 @@ const Sidebar = () => {
 		});
 	};
 
+	const handelShowDisplayName = (name) => {
+		let nameArr = name.split(" ");
+		let newName;
+		if (nameArr.length >= 3) {
+			newName = nameArr[0] + " " + nameArr[nameArr.length - 1];
+		}
+		return newName;
+	};
+
 	return (
 		<div className="sidebar">
 			<div className="sidebar__top">
@@ -112,7 +121,7 @@ const Sidebar = () => {
 					)}
 				</Popper>
 				<div className="sidebar__profileInfo">
-					<h3>{user.displayName}</h3>
+					<h3>{handelShowDisplayName(user.displayName)}</h3>
 					<p>#{user.uid.substring(0, 4)}</p>
 				</div>
 				<div className="sidebar__profileIcons">
