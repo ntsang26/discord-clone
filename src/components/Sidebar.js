@@ -58,7 +58,7 @@ const Sidebar = () => {
 
 	const handelShowDisplayName = (name) => {
 		let nameArr = name.split(" ");
-		let newName;
+		let newName = name;
 		if (nameArr.length >= 3) {
 			newName = nameArr[0] + " " + nameArr[nameArr.length - 1];
 		}
