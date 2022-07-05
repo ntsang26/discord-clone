@@ -42,6 +42,12 @@
 .chat__input > form {
 	flex: 1;
 }
+.chat__input > .add-circle {
+	cursor: pointer;
+}
+.chat__input > .add-circle:hover {
+	color: white;
+}
 .chat__inputButton {
 	display: none;
 }

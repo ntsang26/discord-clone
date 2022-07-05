@@ -1,5 +1,5 @@
 import { AddCircle, Send } from "@material-ui/icons";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Chat.css";
 import ChatHeader from "./ChatHeader.js";
 import Message from "./Message.js";
@@ -16,12 +16,23 @@ const Chat = () => {
 	const [input, setInput] = useState("");
 	const [messages, setMessages] = useState([]);
 
+	const chatBoxRef = useRef(null);
+
+	useEffect(() => {
+		if (chatBoxRef) {
+			chatBoxRef.current.addEventListener("DOMNodeInserted", (event) => {
+				const { currentTarget: target } = event;
+				target.scroll({ top: target.scrollHeight, behavior: "smooth" });
+			});
+		}
+	}, []);
+
 	useEffect(() => {
 		if (channelId) {
 			db.collection("channels")
 				.doc(channelId)
 				.collection("messages")
-				.orderBy("timestamp", "desc")
+				.orderBy("timestamp", "asc")
 				.onSnapshot((snapshot) => {
 					setMessages(snapshot.docs.map((doc) => doc.data()));
 				});
@@ -46,19 +57,19 @@ const Chat = () => {
 		<div className="chat">
 			<ChatHeader channelName={channelName} />
 
-			<div className="chat__messages">
+			<div className="chat__messages" ref={chatBoxRef}>
 				{messages.map((mes, idx) => (
 					<Message key={idx} message={mes} />
 				))}
 			</div>
 
 			<div className="chat__input">
-				<AddCircle fontSize="large" />
+				<AddCircle fontSize="large" className="add-circle" />
 				<form>
 					<input
 						type="text"
 						disabled={!channelId}
-						placeholder={`Message #${channelId?.substring(0, 4) || "channel"}`}
+						placeholder={`Message #${channelName || "channel"}`}
 						value={input}
 						onChange={(e) => setInput(e.target.value)}
 					/>
